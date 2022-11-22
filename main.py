@@ -23,14 +23,14 @@ async def on_ready():
 #loading cogs
 @client.event
 async def load():
-  for file in os.listdir('./cogs'):
+  for file in os.listdir('cogs'):
     if file.endswith('.py'):
       await client.load_extension(f'cogs.{file[:-3]}')
 
 #first Command
 @client.tree.command(name="hello")
 async def hello(interaction:discord.Interaction):
-    await interaction.response.send_message(f"Hey, {interaction.user.mention}!") # , ephemeral=True
+    await interaction.response.send_message(f"Hey, {interaction.user.mention}!")
 
 #load token from secrets
 load_dotenv()
