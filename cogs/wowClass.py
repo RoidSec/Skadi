@@ -8,16 +8,8 @@ class Class(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print('WoW Class cog loaded')
+        print('- WoW Class cog loaded')
 
-    @commands.command()
-    async def sync(self, ctx) -> None:
-        fmt = await ctx.bot.tree.sync()
-        await ctx.send(
-            f"synced {len(fmt)} commands to the current guild"
-        )
-        return
-    
     @app_commands.command(name="chooseclass", description="Class selector")
     @app_commands.describe(wowclass='Classes to choose from')
     @app_commands.choices(wowclass=[
