@@ -18,7 +18,7 @@ class Role(commands.Cog):
         discord.app_commands.Choice(name='Healer', value=3),
     ])
     async def chooserole(self, interaction: discord.Interaction, wowrole: discord.app_commands.Choice[int]):
-        await interaction.response.send_message(f'Role selected: {wowrole.name}')
+        await interaction.response.send_message(f'Role selected: {wowrole.name}', ephemeral=True)
 
 async def setup(bot):
     await bot.add_cog(Role(bot))

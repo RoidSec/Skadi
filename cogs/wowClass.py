@@ -28,7 +28,7 @@ class Class(commands.Cog):
         discord.app_commands.Choice(name='Warrior', value=13),
     ])
     async def chooseclass(self, interaction: discord.Interaction, wowclass: discord.app_commands.Choice[int]):
-        await interaction.response.send_message(f'Class selected: {wowclass.name}')
+        await interaction.response.send_message(f'Class selected: {wowclass.name}', ephemeral=True)
 
 async def setup(bot):
     await bot.add_cog(Class(bot))

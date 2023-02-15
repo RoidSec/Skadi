@@ -11,15 +11,20 @@ class Raid(commands.Cog):
         print('- Raid Maker cog loaded')
     
     @commands.command()
-    async def makeraid(self,ctx):
-        role = 'Tank'
-        player = 'Roidbear'
-        raidteam = discord.Embed(title="Raid Time!",color=0x03dffc)
-        raidteam.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
-        raidteam.set_thumbnail(url='https://i.imgur.com/U2N9l0E.jpg')
-        raidteam.add_field(name='Role',value=' \n'.join(role), inline = True)
-        raidteam.add_field(name='Player',value=' \n'.join(player), inline = True)
-        await ctx.send(embed=raidteam)
+    async def embed(self,ctx):
+        if member == None:
+            member = ctx.author
+        
+        name = member.display_name
+        pfp = member.display_avatar
+
+        embed = discord.Embed(title="Raid Time!", description="this is the description", color=discord.colour.random())
+        embed.set_author(name=f"{name}", icon_url=ctx.author.avatar_url)
+        embed.set_thumbnail(url=f"{pfp}")
+        embed.add_field(name='Role',value='value', inline = True)
+        embed.add_field(name='Player',value='value', inline = True)
+        embed.set_footer(text=f"{name}")
+        await ctx.send(embed=embed)
 
 async def setup(bot):
     await bot.add_cog(Raid(bot))
