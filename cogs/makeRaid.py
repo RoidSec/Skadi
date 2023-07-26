@@ -2,6 +2,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
+
 class Raid(commands.Cog):
     def __init__ (self,bot: commands.Bot):
         self.bot = bot
@@ -14,7 +15,7 @@ class Raid(commands.Cog):
     async def embed(self,ctx):
         if member == None:
             member = ctx.author
-        
+
         name = member.display_name
         pfp = member.display_avatar
 
