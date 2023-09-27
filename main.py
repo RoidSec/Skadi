@@ -1,10 +1,8 @@
 import os
-import config
 import discord
 import asyncio
 from dotenv import load_dotenv
 from discord.ext import commands
-from discord import app_commands
 
 intents = discord.Intents.all()
 intents.message_content = True
