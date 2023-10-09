@@ -1,0 +1,33 @@
+### Python ###
+__pycache__/
+*.py[cod]
+*$py.class
+.cache
+nosetests.xml
+coverage.xml
+.pybuilder/
+target/
+__pypackages__/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.history/
+*.vsix
+.history
+.ionide
+.vscode/*.code-snippets
+*.code-workspace
