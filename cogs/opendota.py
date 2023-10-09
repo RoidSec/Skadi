@@ -1,20 +1,25 @@
 import discord
+import requests
+import os
 from discord import app_commands
 from discord.ext import commands
-import requests
+from dotenv import load_dotenv
 
-class Parse(commands.Cog):
+load_dotenv()
+apikey = os.getenv("apikey")
+
+class opendota(commands.Cog):
     def __init__ (self,bot: commands.Bot):
         self.bot = bot
-
+    
     @commands.Cog.listener()
     async def on_ready(self):
-        print('- Dota Parser cog loaded')
-    
-    @app_commands.command(name="parse", description="OpenDota parser")
+        print('- Open Dota cog loaded')
+
+    @app_commands.command(name="opendota", description="OpenDota parse")
     @app_commands.describe(parse='Choose a person to parse')
     @app_commands.choices(parse=[
-        discord.app_commands.Choice(name='Colin',value=1),
+        discord.app_commands.Choice(name='Zzzonked',value=1),
         discord.app_commands.Choice(name='Connor',value=2),
         discord.app_commands.Choice(name='Shanise',value=3),
         discord.app_commands.Choice(name='Tim',value=4),
@@ -23,21 +28,9 @@ class Parse(commands.Cog):
         discord.app_commands.Choice(name='Harry',value=7),
         discord.app_commands.Choice(name='Casey',value=8)
     ])
-    async def parse(self, interaction: discord.Interaction, parse: discord.app_commands.Choice[int]):
-        await interaction.response.send_message(f'Parse started for {parse.name}', ephemeral=True)
-        
-
-        anthonyID=282780720
-        colinID=44067861
-        connorID=39958451
-        shaniseID=337288948
-        timID=99084628
-        shaunID=145692671
-        harryID=83942876
-        caseyID=69558459
-
+    async def check_stats(self, ctx, player_name):
         try:
-            api_url = f'https://api.opendota.com/api/players/{player_name}?api_key={api_key}'
+            api_url = f'https://api.opendota.com/api/players/{app_commands.Choice}?api_key={apikey}'
             
             response = requests.get(api_url)
             data = response.json()
@@ -51,14 +44,12 @@ class Parse(commands.Cog):
                 embed.add_field(name='Player ID', value=player_id, inline=False)
                 embed.add_field(name='MMR Estimate', value=mmr, inline=False)
                 
-                await interaction.response.send_message(embed=embed)
+                await ctx.send(embed=embed)
             else:
-                await interaction.response.send_message("Player not found or an error occurred while fetching data.")
+                await ctx.send("Player not found or an error occurred while fetching data.")
         
         except Exception as e:
-            await interaction.response.send_message(f"An error occurred: {e}")
-
-
+            await ctx.send(f"An error occurred: {e}")
 
 async def setup(bot):
-    await bot.add_cog(Parse(bot))
+    await bot.add_cog(opendota(bot))
